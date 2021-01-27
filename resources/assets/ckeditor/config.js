@@ -46,5 +46,7 @@ CKEDITOR.editorConfig = function (config) {
         "image2:Link;link:upload;image2:Upload;image2:advanced";
 
     config.extraPlugins =
-        "templates,colordialog,font,tableresize,copyformatting,elementspath,showblocks,youtube,image2";
+        "colorbutton,colordialog,justify,templates,colordialog,font,tableresize,copyformatting,elementspath,showblocks,youtube,image2";
+
+    config.allowedContent = true;
 };
