@@ -18,14 +18,18 @@ class CKEditor extends Field
         $filebrowserUploadUrl = route('ckfinder-connector');
         $filebrowserBrowseUrl = route('ckfinder-browser');
         $this->script = <<<EOT
-        var editor = CKEDITOR.replace('{$this->id}', {
-            filebrowserBrowseUrl: '{$filebrowserBrowseUrl}?type=Files',
-            filebrowserImageBrowseUrl: '{$filebrowserBrowseUrl}?type=Images',
-            filebrowserUploadUrl: '{$filebrowserUploadUrl}?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl: '{$filebrowserUploadUrl}?command=QuickUpload&type=Images',
-            fullPage: $('#{$this->id}').attr('data-full')
+        CKEDITOR.replaceAll(function (textarea, config) {
+            if (textarea.classList.contains("admin-ck") && !textarea.classList.contains("active")){
+                textarea.classList.add("active");
+                config.filebrowserBrowseUrl = '{$filebrowserBrowseUrl}?type=Files';
+                config.filebrowserImageBrowseUrl = '{$filebrowserBrowseUrl}?type=Images';
+                config.filebrowserUploadUrl = '{$filebrowserUploadUrl}?command=QuickUpload&type=Files';
+                config.filebrowserImageUploadUrl = '{$filebrowserUploadUrl}?command=QuickUpload&type=Images';
+                config.fullPage = textarea.dataset.full;
+                return true;
+            }
+            return false;
         });
-        CKFinder.setupCKEditor( editor );
         EOT;
 
         return parent::render();
