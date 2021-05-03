@@ -45,6 +45,8 @@ CKEDITOR.editorConfig = function (config) {
     config.removeDialogTabs =
         "image2:Link;link:upload;image2:Upload;image2:advanced";
 
+    config.removePlugins = 'image';
+
     config.extraPlugins =
         "colorbutton,colordialog,justify,templates,colordialog,font,tableresize,copyformatting,elementspath,showblocks,youtube,image2";
 
